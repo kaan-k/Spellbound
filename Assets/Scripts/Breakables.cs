@@ -30,7 +30,7 @@ public class Breakables : MonoBehaviour
 
                 for(int i = 0; i < piecesToDrop; i++)
                 {
-                    int randomPiece = Random.Range(1, breakables.Length);
+                    int randomPiece = Random.Range(0, breakables.Length);
                     Instantiate(breakables[randomPiece], transform.position,transform.rotation);
                 }
 

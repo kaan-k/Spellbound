@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 244841042169394217}
   - component: {fileID: 2423452122876348768}
   - component: {fileID: 7850820360664508019}
-  - component: {fileID: 3077966901989927720}
+  - component: {fileID: 7808380947839958484}
   m_Layer: 0
   m_Name: Box
   m_TagString: Untagged
@@ -152,7 +152,7 @@ MonoBehaviour:
   - {fileID: 8335511003678359809, guid: eaa6c477404c9774888a4e2fa2fa3cfa, type: 3}
   - {fileID: 380274887553906733, guid: ba4f53a7aec57b64d9c4627fa63388b6, type: 3}
   maxPieces: 5
---- !u!114 &3077966901989927720
+--- !u!114 &7808380947839958484
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -161,8 +161,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 4034124157879200318}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e4e0f868ca6b0a44a42dd4427633443, type: 3}
+  m_Script: {fileID: 11500000, guid: 5090275ace3370f43a99f6770b2ac3f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breakables: []
-  maxPieces: 3
