@@ -88,16 +88,18 @@ public class PlayerController : MonoBehaviour
             }
 
 
-            if (moveInput != Vector2.zero)
-            {
-                animator.SetBool("isMoving", true);
-            }
-            else
-            {
-                animator.SetBool("isMoving", false);
-            }
+
+        }
 
 
+        if (moveInput != Vector2.zero)
+        {
+            Debug.Log(moveInput);
+            animator.SetBool("isMoving", true);
+        }
+        else
+        {
+            animator.SetBool("isMoving", false);
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
