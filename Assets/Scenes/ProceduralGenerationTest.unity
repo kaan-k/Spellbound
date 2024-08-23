@@ -277,11 +277,14 @@ MonoBehaviour:
   layoutRoom: {fileID: 5895983594011110836, guid: 1820f4a0e8d31d5449b51f8226a44b0a, type: 3}
   startColor: {r: 0, g: 0.8867924, b: 0.81601954, a: 1}
   endColor: {r: 1, g: 0, b: 0, a: 1}
-  distanceToEnd: 7
+  distanceToEnd: 10
   generatorPoint: {fileID: 1044235329}
   selectedDirection: 0
   xOffset: 18
   yOffset: 10
+  defineRoom:
+    serializedVersion: 2
+    m_Bits: 2048
 --- !u!4 &1898425214
 Transform:
   m_ObjectHideFlags: 0
