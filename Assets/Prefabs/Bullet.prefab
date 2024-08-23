@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3127438797653488368}
   - component: {fileID: 8725892145810772826}
   - component: {fileID: 6899093473911588675}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bullet
   m_TagString: projectile
   m_Icon: {fileID: 0}
@@ -73,8 +73,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1298766765
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: -3328242913338228825, guid: 56faa61c0738e9b43b0b5aa082c87bb1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -173,3 +173,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 7
   rb: {fileID: 3127438797653488368}
+  dmg: 50

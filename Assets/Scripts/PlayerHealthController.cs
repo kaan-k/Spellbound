@@ -66,4 +66,8 @@ public class PlayerHealthController : MonoBehaviour
             PlayerController.instance.bodySR.color = new Color(PlayerController.instance.bodySR.color.r, PlayerController.instance.bodySR.color.g, PlayerController.instance.bodySR.color.b, .5f);
         }
     }
+    public void HealPlayer(int healAmount)
+    {
+        currentHealth += healAmount;
+    }
 }
