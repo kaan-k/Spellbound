@@ -57,8 +57,8 @@ Transform:
   m_GameObject: {fileID: 7452546122696108093}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.446, y: 0.024, z: 0}
+  m_LocalScale: {x: 0.54180074, y: 0.497287, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5289384634558057386}
@@ -104,7 +104,7 @@ SpriteRenderer:
   m_SortingLayerID: -950162527
   m_SortingLayer: 4
   m_SortingOrder: 1
-  m_Sprite: {fileID: -7537196482120660328, guid: 02027016afbc5d544ab92ba819bc8094, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 040e495257880024489d34c86759bf01, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -127,6 +127,7 @@ GameObject:
   - component: {fileID: 2957028308080757626}
   - component: {fileID: 3577112922830687109}
   - component: {fileID: 6696659208985683629}
+  - component: {fileID: 2818938322545024602}
   m_Layer: 8
   m_Name: Enemy (1)
   m_TagString: Enemy
@@ -209,13 +210,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidBody: {fileID: 6696659208985683629}
-  movementSpeed: 3
-  health: 150
-  rangeToChase: 0
+  movementSpeed: 2
+  health: 200
+  rangeToChase: 20
   shouldShoot: 1
   projectile: {fileID: 7646623803429290084, guid: e8630f27c5191f44a809a5c818ae7acd, type: 3}
   firePoint: {fileID: 441736724576625514}
-  fireRate: 0.2
+  fireRate: 0.7
   shootingRange: 10
   theBody: {fileID: 5515800842666709960}
 --- !u!50 &6696659208985683629
@@ -245,3 +246,17 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &2818938322545024602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7730328521808146208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f0c97ed0f8fbab43882145f36f342b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashColor: {r: 0.29214135, g: 0.9528302, b: 0.9076114, a: 1}
+  flashDuration: 0.1

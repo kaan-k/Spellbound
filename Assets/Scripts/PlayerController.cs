@@ -1,14 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Windows.WebCam;
 
 public class PlayerController : MonoBehaviour
 {
     public static PlayerController instance;
     public float movementSpeed;
-
-    public Transform staffArm;
 
     public Rigidbody2D rigidBody;
 
@@ -18,7 +15,7 @@ public class PlayerController : MonoBehaviour
     public Transform firePoint;
 
     public float timeBetweenCasts;
-    float castCounter;
+    private float castCounter;
 
     private Camera cam;
     private Vector2 moveInput;
@@ -26,49 +23,80 @@ public class PlayerController : MonoBehaviour
     public SpriteRenderer bodySR;
 
     private float activeMoveSpeed;
-    public float dashSpeed = 8f, dashLenght = .5f, dashCooldown = 1f, dashInvis = .5f;
+    public float dashSpeed = 8f, dashLength = .5f, dashCooldown = 1f, dashInvis = .5f;
     [HideInInspector]
     public float dashCounter;
     private float dashCoolCounter;
+
+    private float speedSmoothing = 0.1f; // Smoothing factor for speed
+    private float smoothedSpeed; // Smoothed speed value
+
     private void Awake()
     {
         instance = this;
     }
-    // Start is called before the first frame update
+
     void Start()
     {
- 
         cam = Camera.main;
         activeMoveSpeed = movementSpeed;
+
+        if (animator == null)
+        {
+            animator = GetComponentInChildren<Animator>();
+            if (animator == null)
+            {
+               ;
+            }
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
+        // Handle Movement Input
         moveInput.x = Input.GetAxisRaw("Horizontal");
         moveInput.y = Input.GetAxisRaw("Vertical");
         moveInput.Normalize();
+
+        // Apply Movement
         rigidBody.velocity = moveInput * activeMoveSpeed;
-        Vector3 mousePosition = Input.mousePosition;
-        Vector3 screenPoint = cam.WorldToScreenPoint(transform.localPosition);
 
+        // Smooth the Speed value to avoid twitching
+        float targetSpeed = moveInput.magnitude; // Calculate the magnitude of the movement
+        smoothedSpeed = Mathf.Lerp(smoothedSpeed, targetSpeed, speedSmoothing);
 
-        if (mousePosition.x < screenPoint.x)
+        // Define an epsilon value to consider as "close to zero"
+        const float epsilon = 0.001f;
+
+        if (animator != null)
         {
-            transform.localScale = new Vector3(-1, 1, 1);
-            staffArm.localScale = new Vector3(-1, -1, 1);
+            if (Mathf.Abs(smoothedSpeed) < epsilon) // Check if smoothedSpeed is close enough to zero
+            {
+                animator.Play("HeikoIdle"); // Make sure this matches your state name in the Animator
+               
+            }
+            else
+            {
+                animator.SetFloat("Speed", smoothedSpeed);
+               
+            }
         }
         else
         {
-            transform.localScale = Vector3.one;
-            staffArm.localScale = Vector3.one;
+           
         }
 
-        Vector2 offset = new Vector2(mousePosition.x - screenPoint.x, mousePosition.y - screenPoint.y);
-        float angle = Mathf.Atan2(offset.y, offset.x) * Mathf.Rad2Deg;
-        staffArm.rotation = Quaternion.Euler(0, 0, angle);
-        //transform.position += new Vector3(moveInput.x * Time.deltaTime * movementSpeed,moveInput.y * Time.deltaTime * movementSpeed,0f);
+        // Make the Character Face the Movement Direction
+        if (moveInput.x < 0)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
+        else if (moveInput.x > 0)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
 
+        // Firing Logic
         if (Input.GetMouseButtonDown(0))
         {
             Instantiate(firingObject, firePoint.position, firePoint.rotation);
@@ -81,51 +109,42 @@ public class PlayerController : MonoBehaviour
 
             if (castCounter < 0)
             {
-                Quaternion disturbance = Quaternion.Euler(0, 0, Random.Range(0.1f,1.1f) * 10f);
+                Quaternion disturbance = Quaternion.Euler(0, 0, Random.Range(0.1f, 1.1f) * 10f);
                 Quaternion disturbedRotation = firePoint.rotation * disturbance;
                 Instantiate(firingObject, firePoint.position, disturbedRotation);
                 castCounter = timeBetweenCasts;
             }
-
-
-
         }
 
-
-        if (moveInput != Vector2.zero)
-        {
-            Debug.Log(moveInput);
-            animator.SetBool("isMoving", true);
-        }
-        else
-        {
-            animator.SetBool("isMoving", false);
-        }
+        // Handle Dashing Logic
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if(dashCoolCounter <= 0 && dashCounter <= 0)
+            if (dashCoolCounter <= 0 && dashCounter <= 0)
             {
                 activeMoveSpeed = dashSpeed;
-                dashCounter = dashLenght;
-                animator.SetTrigger("dash");
+                dashCounter = dashLength;
+                if (animator != null)
+                {
+                    animator.SetTrigger("dash");
+                }
                 PlayerHealthController.instance.InvinciblityFrames();
             }
-
         }
 
-        if(dashCounter > 0)
+        if (dashCounter > 0)
         {
             dashCounter -= Time.deltaTime;
-            if(dashCounter <= 0)
+            if (dashCounter <= 0)
             {
                 activeMoveSpeed = movementSpeed;
                 dashCoolCounter = dashCooldown;
-
             }
         }
-        if(dashCoolCounter > 0)
+
+        if (dashCoolCounter > 0)
         {
             dashCoolCounter -= Time.deltaTime;
-        }    
+        }
     }
 }
+

@@ -42,7 +42,6 @@ public class PlayerHealthController : MonoBehaviour
 
         // Seperate function for invincibility frames.
 
-        Debug.Log("test");
         if (invisCount <= 0)
         {
             currentHealth--;
