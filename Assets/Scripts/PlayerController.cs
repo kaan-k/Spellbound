@@ -127,7 +127,8 @@ public class PlayerController : MonoBehaviour
                 {
                     animator.SetTrigger("dash");
                 }
-                PlayerHealthController.instance.InvinciblityFrames();
+                PlayerHealthController.instance.InvincibilityFrames();
+
             }
         }
 

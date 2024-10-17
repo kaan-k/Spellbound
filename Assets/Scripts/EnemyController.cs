@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
@@ -8,65 +7,41 @@ public class EnemyController : MonoBehaviour
     public Rigidbody2D rigidBody;
     public float movementSpeed;
     public int health = 150;
-
     public float rangeToChase;
+    public float separationRadius = 1.5f;
+    public float separationForce = 5f;
+
     private Vector3 moveDir;
-
     public bool shouldShoot;
-
     public GameObject projectile;
     public Transform firePoint;
     public float fireRate;
     private float fireCounter;
-
     public float shootingRange;
-
     public SpriteRenderer theBody;
 
-    private FlashEffect flashEffect; // Reference to the FlashEffect script
+    public float surroundDistance = 3f; // Preferred distance around the player to surround them
+    public float knockbackForce = 5f;
+    public Color flashColor = Color.red;
+    public float flashDuration = 0.1f;
+    private Color originalColor;
 
-    // Knockback settings
-    public float knockbackForce = 5f; // Adjust this value to control the strength of the knockback
-    public float knockbackDuration = 0.2f; // Duration of the knockback effect
-    private bool isKnockedBack = false; // To track if the enemy is currently knocked back
-    private float knockbackCounter;
-
-    void Start()
+    private void Start()
     {
-        flashEffect = GetComponent<FlashEffect>(); // Get the FlashEffect component
-        if (flashEffect == null)
-        {
-            Debug.LogError("FlashEffect component is missing on the Enemy!");
-        }
+        originalColor = theBody.color; // Store the original color for flash effect
     }
 
-    void Update()
+    private void Update()
     {
-        if (isKnockedBack)
-        {
-            knockbackCounter -= Time.deltaTime;
-            if (knockbackCounter <= 0)
-            {
-                isKnockedBack = false; // Reset knockback state
-                rigidBody.velocity = Vector2.zero; // Stop the knockback force
-            }
-            return; // Skip the regular movement and shooting logic while knocked back
-        }
-
         if (theBody.isVisible && PlayerController.instance.gameObject.activeInHierarchy)
         {
-            if (Vector3.Distance(transform.position, PlayerController.instance.transform.position) < rangeToChase)
-            {
-                moveDir = PlayerController.instance.transform.position - transform.position;
-            }
-            else
-            {
-                moveDir = Vector3.zero;
-            }
-            moveDir.Normalize();
+            Vector3 targetPosition = CalculateSurroundPosition();
+            moveDir = (PlayerController.instance.transform.position - transform.position).normalized;
 
-            rigidBody.velocity = moveDir * movementSpeed;
+            // Convert separation to Vector3 to match moveDir type
+            rigidBody.velocity = (moveDir * movementSpeed) + (Vector3)CalculateSeparation();
 
+            // Shooting logic
             if (shouldShoot && Vector3.Distance(transform.position, PlayerController.instance.transform.position) < shootingRange)
             {
                 fireCounter -= Time.deltaTime;
@@ -84,17 +59,51 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    public void DamageEnemy(int damage)
+    private Vector2 CalculateSeparation()
+    {
+        Vector2 separation = Vector2.zero;
+        var nearbyEnemies = FindObjectsOfType<EnemyController>();
+
+        foreach (var enemy in nearbyEnemies)
+        {
+            if (enemy != this)
+            {
+                float distance = Vector2.Distance(transform.position, enemy.transform.position);
+
+                if (distance < separationRadius)
+                {
+                    Vector2 directionAway = (transform.position - enemy.transform.position).normalized;
+                    separation += directionAway * (separationForce / distance);
+                }
+            }
+        }
+
+        return separation;
+    }
+
+    private Vector3 CalculateSurroundPosition()
+    {
+        Vector3 playerPosition = PlayerController.instance.transform.position;
+        Vector3 directionToPlayer = (transform.position - playerPosition).normalized;
+
+        float angleOffset = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
+        angleOffset += Random.Range(-30, 30); // Add some randomness to make the movement less predictable
+
+        float radianAngle = angleOffset * Mathf.Deg2Rad;
+        Vector3 offset = new Vector3(Mathf.Cos(radianAngle), Mathf.Sin(radianAngle), 0) * surroundDistance;
+
+        return playerPosition + offset;
+    }
+
+    public void DamageEnemy(int damage, Vector2 knockbackDirection)
     {
         health -= damage;
 
-        // Trigger flash effect when the enemy takes damage
-        if (flashEffect != null)
-        {
-            flashEffect.TriggerFlash();
-        }
+        // Apply knockback force
+        rigidBody.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
 
-        ApplyKnockback();
+        // Apply flash effect
+        StartCoroutine(FlashEffect());
 
         if (health <= 0)
         {
@@ -102,17 +111,11 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    // Method to apply knockback effect
-    private void ApplyKnockback()
+    // Flash effect coroutine
+    private IEnumerator FlashEffect()
     {
-        // Calculate direction for knockback
-        Vector2 knockbackDirection = (transform.position - PlayerController.instance.transform.position).normalized;
-
-        // Apply force to the Rigidbody2D
-        rigidBody.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
-
-        // Set knockback state
-        isKnockedBack = true;
-        knockbackCounter = knockbackDuration;
+        theBody.color = flashColor;
+        yield return new WaitForSeconds(flashDuration);
+        theBody.color = originalColor;
     }
 }

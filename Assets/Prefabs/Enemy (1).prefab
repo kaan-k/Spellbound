@@ -213,12 +213,18 @@ MonoBehaviour:
   movementSpeed: 2
   health: 200
   rangeToChase: 20
+  separationRadius: 1.5
+  separationForce: 5
   shouldShoot: 1
   projectile: {fileID: 7646623803429290084, guid: e8630f27c5191f44a809a5c818ae7acd, type: 3}
   firePoint: {fileID: 441736724576625514}
   fireRate: 0.7
   shootingRange: 10
   theBody: {fileID: 5515800842666709960}
+  surroundDistance: 3
+  knockbackForce: 1
+  flashColor: {r: 0, g: 0.9898963, b: 1, a: 1}
+  flashDuration: 0.1
 --- !u!50 &6696659208985683629
 Rigidbody2D:
   serializedVersion: 4
