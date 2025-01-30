@@ -91,7 +91,7 @@ public class PlayerHealthController : MonoBehaviour
     {
         if (invisCount <= 0)
         {
-            invisCount = invisLenght;
+            invisCount = invisLength;
             PlayerController.instance.bodySR.color = new Color(PlayerController.instance.bodySR.color.r, PlayerController.instance.bodySR.color.g, PlayerController.instance.bodySR.color.b, .5f);
         }
     }
