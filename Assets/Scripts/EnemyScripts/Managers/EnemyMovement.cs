@@ -12,12 +12,6 @@ public class EnemyMovement : MonoBehaviour, IMoveable
     public float surroundDistance = 3f;
 
     public SpriteRenderer theBody;
-
-    private void Update()
-    {
-        Move();
-    }
-
     private bool IsActiveAndVisible()
     {
         return theBody.isVisible && PlayerController.instance.gameObject.activeInHierarchy;
