@@ -1,57 +1,31 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class FireMinion : MonoBehaviour
 {
-    [SerializeField] private Rigidbody2D rigidBody;
-    [SerializeField] private float movementSpeed = 5f;
-    [SerializeField] private string enemyTag = "Enemy";
-    [SerializeField] private int damageAmount = 10;
-    [SerializeField] private Vector2 knockbackForce = Vector2.right;
-    [SerializeField] public bool hasTarget = false;
-
-
-    private ITargetSelector targetSelector;
-    private IMover mover;
-    private ICollisionHandler collisionHandler;
-
-    private GameObject currentTarget;
-
+    public int damage;
+    private MoveTowards moveTowards;
+    private TargetSelector targetSelector;
+    private CollisionHandler collisionHandler;
     private void Awake()
     {
-
-        targetSelector = new EnemyTargetSelector(enemyTag);
-        mover = new MinionMover(rigidBody, movementSpeed);
-        collisionHandler = new DamageCollisionHandler(damageAmount, knockbackForce);
+        collisionHandler = GetComponent<CollisionHandler>();
+        moveTowards = GetComponent<MoveTowards>();
+        targetSelector = GetComponent<TargetSelector>();
     }
-
-    private void Start()
+    void Update()
     {
-        // Initialize rotation (if needed) and acquire the first target.
-        transform.rotation = Quaternion.identity;
-        currentTarget = targetSelector.SelectTarget();
-    }
-
-    private void Update()
-    {
-        if (currentTarget != null)
-        {
-            mover.MoveTowards(currentTarget.transform.position, transform.position);
-            hasTarget = true;
-        }
-        else
-        {
-
-            // Attempt to re-acquire a target if lost.
-            currentTarget = targetSelector.SelectTarget();
-        }
+        GameObject target = targetSelector.SelectTarget(targetSelector.targetTag);
+        moveTowards.Move(target);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag(enemyTag))
+        if (collision.gameObject.CompareTag("Enemy"))
         {
-            collisionHandler.HandleCollision(collision.gameObject);
-            Destroy(this.gameObject);
+            collision.gameObject.GetComponent<Damageable>().TakeDamage(damage);
+            Destroy(gameObject);
         }
     }
 }

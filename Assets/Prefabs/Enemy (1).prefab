@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 7736039682250063610}
   - component: {fileID: 5304565295178822752}
   - component: {fileID: 5685995856079970515}
+  - component: {fileID: 8493801307996134764}
   m_Layer: 8
   m_Name: Enemy (1)
   m_TagString: Enemy
@@ -247,12 +248,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7730328521808146208}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f58d655ff1c9d4b4498d29d2f10e89ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 150
+  health: 1
   knockbackForce: 5
   theBody: {fileID: 5515800842666709960}
   flashColor: {r: 1, g: 0, b: 0, a: 1}
@@ -282,7 +283,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7730328521808146208}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b9ba3e1099a8e8b488a0e180cf505ee7, type: 3}
   m_Name: 
@@ -292,3 +293,19 @@ MonoBehaviour:
   firePoint: {fileID: 441736724576625514}
   fireRate: 1
   shootingRange: 5
+--- !u!114 &8493801307996134764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7730328521808146208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1889f7e8e696c994891e10c4bbd6454d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 5
+  theBody: {fileID: 5515800842666709960}
+  flashColor: {r: 1, g: 0, b: 0, a: 1}
+  flashDuration: 0.1

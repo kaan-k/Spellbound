@@ -2,5 +2,5 @@ using UnityEngine;
 
 public interface ITargetSelector
 {
-    GameObject SelectTarget();
+    public GameObject SelectTarget(string targetTag);
 }

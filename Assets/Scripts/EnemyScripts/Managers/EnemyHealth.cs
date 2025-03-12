@@ -8,7 +8,6 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     public SpriteRenderer theBody;
     public Color flashColor = Color.red;
     public float flashDuration = 0.1f;
-
     private Color originalColor;
 
     private void Start()
