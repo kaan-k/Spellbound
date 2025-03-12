@@ -28,7 +28,7 @@ public class Breakables : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            if(PlayerController.instance.dashCounter > 0)
+            if(other.GetComponent<PlayerDash>().dashCounter > 0)
             {
                 Destroy(this.gameObject);
                 piecesToDrop = Random.Range(1, maxPieces);

@@ -94,8 +94,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4966706797992431027}
   - component: {fileID: 1451738197532562327}
-  - component: {fileID: 7519268982254260338}
   - component: {fileID: 997772510434883875}
+  - component: {fileID: 605171228265919296}
+  - component: {fileID: 4596219318027547525}
   m_Layer: 0
   m_Name: Minion
   m_TagString: Untagged
@@ -134,7 +135,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4160
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -163,22 +164,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 0.8500806, y: 1}
-  m_EdgeRadius: 0
---- !u!114 &7519268982254260338
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7582632611377102180}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e1900df1e34b64479eed8e0f43af9f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rigidBody: {fileID: 997772510434883875}
-  movementSpeed: 2
-  selectedEnemy: {fileID: 0}
+  m_EdgeRadius: 0.32
 --- !u!50 &997772510434883875
 Rigidbody2D:
   serializedVersion: 4
@@ -206,3 +192,38 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &605171228265919296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7582632611377102180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 966f50a795716ba44b61e302dca9e1c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigidBody: {fileID: 997772510434883875}
+  movementSpeed: 5
+  enemyTag: Enemy
+  damageAmount: 10
+  knockbackForce: {x: 1, y: 0}
+  hasTarget: 1
+--- !u!114 &4596219318027547525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7582632611377102180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c9e244129dd3c74096931ed98feaf21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 11.49
+  followDistance: 2
+  separationRadius: 1
+  separationWeight: 1.5
+  fireMinion: {fileID: 605171228265919296}

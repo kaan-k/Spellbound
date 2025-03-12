@@ -125,9 +125,11 @@ GameObject:
   m_Component:
   - component: {fileID: 5289384634558057386}
   - component: {fileID: 2957028308080757626}
-  - component: {fileID: 3577112922830687109}
   - component: {fileID: 6696659208985683629}
   - component: {fileID: 2818938322545024602}
+  - component: {fileID: 7736039682250063610}
+  - component: {fileID: 5304565295178822752}
+  - component: {fileID: 5685995856079970515}
   m_Layer: 8
   m_Name: Enemy (1)
   m_TagString: Enemy
@@ -197,34 +199,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.6833813, y: 1}
   m_EdgeRadius: 0
---- !u!114 &3577112922830687109
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7730328521808146208}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4cbd81b1a347a744a8c97640430730b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rigidBody: {fileID: 6696659208985683629}
-  movementSpeed: 2
-  health: 50
-  rangeToChase: 5
-  separationRadius: 1.5
-  separationForce: 5
-  shouldShoot: 1
-  projectile: {fileID: 7646623803429290084, guid: e8630f27c5191f44a809a5c818ae7acd, type: 3}
-  firePoint: {fileID: 441736724576625514}
-  fireRate: 0.7
-  shootingRange: 4.6
-  theBody: {fileID: 5515800842666709960}
-  surroundDistance: 3
-  knockbackForce: 1
-  flashColor: {r: 0, g: 0.9898963, b: 1, a: 1}
-  flashDuration: 0.1
 --- !u!50 &6696659208985683629
 Rigidbody2D:
   serializedVersion: 4
@@ -259,10 +233,62 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7730328521808146208}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7f0c97ed0f8fbab43882145f36f342b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   flashColor: {r: 0.29214135, g: 0.9528302, b: 0.9076114, a: 1}
   flashDuration: 0.1
+--- !u!114 &7736039682250063610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7730328521808146208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f58d655ff1c9d4b4498d29d2f10e89ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 150
+  knockbackForce: 5
+  theBody: {fileID: 5515800842666709960}
+  flashColor: {r: 1, g: 0, b: 0, a: 1}
+  flashDuration: 0.1
+--- !u!114 &5304565295178822752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7730328521808146208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ec6753fc10b3164fbc9f039c034aeeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigidBody: {fileID: 6696659208985683629}
+  movementSpeed: 1
+  separationRadius: 1.5
+  separationForce: 5
+  surroundDistance: 3
+  theBody: {fileID: 5515800842666709960}
+--- !u!114 &5685995856079970515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7730328521808146208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9ba3e1099a8e8b488a0e180cf505ee7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shouldShoot: 1
+  projectile: {fileID: 7646623803429290084, guid: e8630f27c5191f44a809a5c818ae7acd, type: 3}
+  firePoint: {fileID: 441736724576625514}
+  fireRate: 1
+  shootingRange: 5
