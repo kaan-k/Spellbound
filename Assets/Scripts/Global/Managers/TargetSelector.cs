@@ -19,7 +19,6 @@ public class TargetSelector : MonoBehaviour, ITargetSelector
     public GameObject SelectTarget(string targetTag)
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag(targetTag);
-
         if (enemies.Length == 0)
         {
             hasTarget = false;
@@ -27,10 +26,24 @@ public class TargetSelector : MonoBehaviour, ITargetSelector
             return null;
         }
 
-        // Find the closest enemy
-        selectedEnemy = enemies.OrderBy(enemy => Vector2.Distance(transform.position, enemy.transform.position)).FirstOrDefault();
-        hasTarget = selectedEnemy != null;
+        // Find closest enemy in O(n) time
+        float minDistance = float.MaxValue;
+        GameObject closestEnemy = null;
 
+        Vector2 currentPosition = transform.position;
+
+        foreach (var enemy in enemies)
+        {
+            float distance = Vector2.Distance(currentPosition, enemy.transform.position);
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                closestEnemy = enemy;
+            }
+        }
+
+        selectedEnemy = closestEnemy;
+        hasTarget = selectedEnemy != null;
         return selectedEnemy;
     }
 }

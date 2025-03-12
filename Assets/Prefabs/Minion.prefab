@@ -96,9 +96,9 @@ GameObject:
   - component: {fileID: 1451738197532562327}
   - component: {fileID: 997772510434883875}
   - component: {fileID: 254800977296288303}
-  - component: {fileID: 1599382636494105688}
   - component: {fileID: 820319603775774561}
   - component: {fileID: 4386731201228349428}
+  - component: {fileID: 4371728920320563666}
   m_Layer: 0
   m_Name: Minion
   m_TagString: Untagged
@@ -206,19 +206,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38f749081739053409f2b8873f10faaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1599382636494105688
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7582632611377102180}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7b922aaf3fa8c740a85b8c619eb315b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementSpeed: 3
 --- !u!114 &820319603775774561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -247,3 +234,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 5
+  player: {fileID: 0}
+--- !u!114 &4371728920320563666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7582632611377102180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7870998d2bcecf54faa12b160b3ffecc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpeed: 3

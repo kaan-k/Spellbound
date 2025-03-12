@@ -1,23 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FireMinion : MonoBehaviour
 {
     public int damage;
-    private MoveTowards moveTowards;
-    private TargetSelector targetSelector;
+    private ITargetSelector targetSelector;
+    private IMovable movement;
     private CollisionHandler collisionHandler;
+
     private void Awake()
     {
         collisionHandler = GetComponent<CollisionHandler>();
-        moveTowards = GetComponent<MoveTowards>();
-        targetSelector = GetComponent<TargetSelector>();
+        targetSelector = GetComponent<ITargetSelector>();
+        movement = GetComponent<IMovable>();
     }
-    void Update()
+
+    private void Update()
     {
-        GameObject target = targetSelector.SelectTarget(targetSelector.targetTag);
-        moveTowards.Move(target);
+        GameObject target = targetSelector.SelectTarget("Enemy");
+        if (target == null)
+        {
+            target = targetSelector.SelectTarget("Player");
+        }
+
+        movement.Move(target);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
