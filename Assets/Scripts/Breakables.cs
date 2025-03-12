@@ -7,6 +7,11 @@ public class Breakables : MonoBehaviour
     public GameObject[] breakables;
     private int piecesToDrop;
     public int maxPieces = 3;
+
+
+    public bool shouldDropItem = false;
+    public GameObject[] itemsToDrop;
+    public float dropChangePercentage;
     
     // Start is called before the first frame update
     void Start()
@@ -23,7 +28,7 @@ public class Breakables : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            if(PlayerController.instance.dashCounter > 0)
+            if(other.GetComponent<PlayerDash>().dashCounter > 0)
             {
                 Destroy(this.gameObject);
                 piecesToDrop = Random.Range(1, maxPieces);
@@ -32,9 +37,20 @@ public class Breakables : MonoBehaviour
                 {
                     int randomPiece = Random.Range(0, breakables.Length);
                     Instantiate(breakables[randomPiece], transform.position,transform.rotation);
+                    shouldDropItem = true;
                 }
+            }
+            if (shouldDropItem)
+            {
+                float dropChance = Random.Range(0f, 100f);
 
+                if(dropChance < dropChangePercentage)
+                {
+                    int randomItem = Random.Range(0,itemsToDrop.Length);
 
+                    Instantiate(itemsToDrop[randomItem], transform.position, transform.rotation);
+
+                }
             }
 
         }
