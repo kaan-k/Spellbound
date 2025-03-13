@@ -19,7 +19,7 @@ public class PlayerShooting : MonoBehaviour, IPlayerShooting
 
         if (Input.GetMouseButtonDown(0))
         {
-            Instantiate(firingObject, firePoint.position, firePoint.rotation);
+            Instantiate(firingObject, firePoint.position, Quaternion.identity);
             castCounter = timeBetweenCasts;
         }
 

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1705809779078541671}
   - component: {fileID: 520607580830477563}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Enemies_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,13 +95,16 @@ GameObject:
   - component: {fileID: 4966706797992431027}
   - component: {fileID: 1451738197532562327}
   - component: {fileID: 997772510434883875}
+  - component: {fileID: 5962232010872713997}
+  - component: {fileID: 4919820956607550790}
   - component: {fileID: 254800977296288303}
   - component: {fileID: 820319603775774561}
   - component: {fileID: 4386731201228349428}
   - component: {fileID: 4371728920320563666}
-  m_Layer: 0
+  - component: {fileID: 7550440424281274082}
+  m_Layer: 12
   m_Name: Minion
-  m_TagString: Untagged
+  m_TagString: Minion
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -154,7 +157,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.018592626, y: -0.018894583}
+  m_Offset: {x: -0.00005853176, y: -0.018894583}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -165,7 +168,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7818114, y: 0.9530191}
+  m_Size: {x: 0.7447432, y: 0.9530191}
   m_EdgeRadius: 0
 --- !u!50 &997772510434883875
 Rigidbody2D:
@@ -194,6 +197,40 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &5962232010872713997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7582632611377102180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46f7e09a299d4854e9c966bcacb8e760, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  moveSpeed: 3
+  followDistance: 1.5
+  separationRadius: 5
+  separationWeight: 1.5
+--- !u!114 &4919820956607550790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7582632611377102180}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e197a21bd05032e44a1d364bafa49b71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  moveSpeed: 5
+  followDistance: 2
+  separationRadius: 4
+  separationWeight: 4
 --- !u!114 &254800977296288303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,7 +271,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 5
-  player: {fileID: 0}
+  hasTarget: 0
+  rb: {fileID: 997772510434883875}
 --- !u!114 &4371728920320563666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,3 +286,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 3
+--- !u!114 &7550440424281274082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7582632611377102180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7442b0dbe00982341abbd5313d3da7cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
