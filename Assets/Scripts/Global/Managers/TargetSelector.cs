@@ -9,7 +9,7 @@ public class TargetSelector : MonoBehaviour, ITargetSelector
     public bool hasTarget = false;
     public string targetTag;
 
-    void Update()
+    void FixedUpdate()
     {
         SelectTarget(targetTag);
     }

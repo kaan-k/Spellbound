@@ -198,6 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 0
+  hasTarget: 0
 --- !u!1 &433749086
 GameObject:
   m_ObjectHideFlags: 0
