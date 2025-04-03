@@ -47,7 +47,7 @@ public class PlayerShooting : MonoBehaviour, IPlayerShooting
 
         if (Input.GetMouseButtonDown(0))
         {
-            Instantiate(firingObject, firePoint.position, Quaternion.identity);
+            Instantiate(firingObject, firePoint.position, firePoint.rotation);
             audioSource.PlayOneShot(shootSound);
             StartCoroutine(cameraShake.Shake(0.1f, 0.1f));
             castCounter = timeBetweenCasts;
@@ -63,6 +63,8 @@ public class PlayerShooting : MonoBehaviour, IPlayerShooting
                 Quaternion disturbance = Quaternion.Euler(0, 0, Random.Range(0.1f, 1.1f) * 10f);
                 Quaternion disturbedRotation = firePoint.rotation * disturbance;
                 Instantiate(firingObject, firePoint.position, disturbedRotation);
+                audioSource.PlayOneShot(shootSound);
+                StartCoroutine(cameraShake.Shake(0.1f, 0.1f));
                 castCounter = timeBetweenCasts;
             }
         }

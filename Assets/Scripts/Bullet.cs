@@ -42,7 +42,7 @@ public class Bullet : MonoBehaviour
         }
         else
         {
-            Debug.Log("error collisions");
+            Destroy(gameObject);
         }
     }
 
