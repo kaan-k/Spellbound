@@ -21,22 +21,27 @@ public class Bullet : MonoBehaviour
         rb.velocity = transform.right * speed;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.tag != "projectile")
-        {
-            Destroy(gameObject);
-        }
+        //if (!collision.gameObject.CompareTag("projectile"))
+        //{
+        //    Destroy(gameObject);
+        //}
 
-        if (collision.tag == "Enemy")
+        if (collision.gameObject.CompareTag("Enemy"))
         {
             // Calculate the knockback direction (from bullet to enemy)
             Vector2 knockbackDirection = (collision.transform.position - transform.position).normalized;
 
             // Apply damage and knockback to the enemy
-            collision.GetComponent<EnemyController>().DamageEnemy(dmg, knockbackDirection);
+            //collision.gameObject.GetComponent<EnemyController>().DamageEnemy(dmg, knockbackDirection);
 
+            collision.gameObject.GetComponent<Damageable>().TakeDamage(dmg);
             // Destroy the bullet after it hits the enemy
+            Destroy(gameObject);
+        }
+        else
+        {
             Destroy(gameObject);
         }
     }

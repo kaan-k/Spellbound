@@ -7,6 +7,7 @@ public class Breakables : MonoBehaviour
     public GameObject[] breakables;
     private int piecesToDrop;
     public int maxPieces = 3;
+    public int breakableHealth =3;
 
 
     public bool shouldDropItem = false;
@@ -24,11 +25,11 @@ public class Breakables : MonoBehaviour
     {
         
     }
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        if(other.tag == "Player")
+        if(other.gameObject.CompareTag("Player"))
         {
-            if(other.GetComponent<PlayerDash>().dashCounter > 0)
+            if(other.gameObject.GetComponent<PlayerDash>().dashCounter > 0)
             {
                 Destroy(this.gameObject);
                 piecesToDrop = Random.Range(1, maxPieces);
@@ -53,6 +54,34 @@ public class Breakables : MonoBehaviour
                 }
             }
 
+        }
+        else if (other.gameObject.CompareTag("Projectile"))
+        {
+            breakableHealth--;
+            if (breakableHealth < 0)
+            {
+                Destroy(this.gameObject);
+                piecesToDrop = Random.Range(1, maxPieces);
+
+                for (int i = 0; i < piecesToDrop; i++)
+                {
+                    int randomPiece = Random.Range(0, breakables.Length);
+                    Instantiate(breakables[randomPiece], transform.position, transform.rotation);
+                    shouldDropItem = true;
+                }
+            }
+            if (shouldDropItem)
+            {
+                float dropChance = Random.Range(0f, 100f);
+
+                if (dropChance < dropChangePercentage)
+                {
+                    int randomItem = Random.Range(0, itemsToDrop.Length);
+
+                    Instantiate(itemsToDrop[randomItem], transform.position, transform.rotation);
+
+                }
+            }
         }
         
     }
