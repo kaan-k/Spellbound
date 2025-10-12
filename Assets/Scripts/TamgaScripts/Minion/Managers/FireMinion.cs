@@ -3,13 +3,14 @@ using UnityEngine;
 public class FireMinion : MonoBehaviour
 {
     public int damage;
-    public bool hasTarget;
+    public bool hasTarget = false;
     private ITargetSelector targetSelector;
     private IMovable movement;
     private CollisionHandler collisionHandler;
     private IDistanceCalculator distanceCalculator;
     private IFlocker flocker;
     public Rigidbody2D rb;
+    private GameObject target;
     private void Awake()
     {
         collisionHandler = GetComponent<CollisionHandler>();
@@ -20,10 +21,12 @@ public class FireMinion : MonoBehaviour
         //rb = GetComponent<Rigidbody2D>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
 
-        GameObject target = targetSelector.SelectTarget("Enemy");
+        target = targetSelector.SelectTarget("Enemy");
+        
+            
 
         if (target == null)
         {

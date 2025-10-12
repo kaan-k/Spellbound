@@ -17,6 +17,6 @@ public class MoveTowards : MonoBehaviour, IMovable
         if (selectedEnemy == null) return;
 
         Vector3 moveDir = (selectedEnemy.transform.position - transform.position).normalized;
-        rigidBody.velocity = moveDir * movementSpeed;
+        rigidBody.linearVelocity = moveDir * movementSpeed;
     }
 }

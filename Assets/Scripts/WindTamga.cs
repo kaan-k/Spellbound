@@ -12,7 +12,7 @@ public class WindTamga : Bullet
         Rigidbody2D rb = other.GetComponent<Rigidbody2D>();
         if (rb != null)
         {
-            rb.velocity = Vector2.zero; // Reset velocity to prevent stacking force
+            rb.linearVelocity = Vector2.zero; // Reset velocity to prevent stacking force
             rb.AddForce(windDirection.normalized * knockbackForce, ForceMode2D.Impulse);
         }
     }

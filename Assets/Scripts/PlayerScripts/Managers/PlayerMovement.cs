@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour, IPlayerMovement
         moveInput.Normalize();
 
 
-        rigidBody.velocity = moveInput * activeMoveSpeed;
+        rigidBody.linearVelocity = moveInput * activeMoveSpeed;
 
 
         float targetSpeed = moveInput.magnitude;

@@ -39,7 +39,7 @@ public class EnemyController : MonoBehaviour
             moveDir = (PlayerController.instance.transform.position - transform.position).normalized;
 
             // Convert separation to Vector3 to match moveDir type
-            rigidBody.velocity = (moveDir * movementSpeed) + (Vector3)CalculateSeparation();
+            rigidBody.linearVelocity = (moveDir * movementSpeed) + (Vector3)CalculateSeparation();
 
             // Shooting logic
             if (shouldShoot && Vector3.Distance(transform.position, PlayerController.instance.transform.position) < shootingRange)
@@ -55,7 +55,7 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
-            rigidBody.velocity = Vector3.zero;
+            rigidBody.linearVelocity = Vector3.zero;
         }
     }
 

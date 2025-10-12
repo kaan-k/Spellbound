@@ -32,11 +32,11 @@ public class MinionFlockTest : MonoBehaviour
 
                 // Combine movement towards player and separation
                 Vector2 finalVelocity = moveDirection + separationForce * separationWeight;
-                rb.velocity = finalVelocity.normalized * moveSpeed;
+                rb.linearVelocity = finalVelocity.normalized * moveSpeed;
             }
             else
             {
-                rb.velocity = Vector2.zero;
+                rb.linearVelocity = Vector2.zero;
             }
         }
     }

@@ -57,11 +57,11 @@ public class EnemyMovement : MonoBehaviour, IMoveable
             Vector3 moveDir = (PlayerController.instance.transform.position - transform.position).normalized;
 
             Vector2 separation = CalculateSeparation();
-            rigidBody.velocity = (moveDir * movementSpeed) + (Vector3)separation;
+            rigidBody.linearVelocity = (moveDir * movementSpeed) + (Vector3)separation;
         }
         else
         {
-            rigidBody.velocity = Vector3.zero;
+            rigidBody.linearVelocity = Vector3.zero;
         }
     }
 }

@@ -5,19 +5,27 @@ using UnityEngine;
 public class Flocker : MonoBehaviour, IFlocker
 {
     public Transform player;
+    public int rayCount;
     public float moveSpeed = 5f;
     public float followDistance = 2f;
     public float separationRadius = 1f;
     public float separationWeight = 1.5f;
+    public float rayDistance = 2f;
+    public float avoidStrength = 4f;
+    public LayerMask obstacleMask;
 
     //private Rigidbody2D rb;
     private static List<Flocker> allMinions = new List<Flocker>();
-
+    private CalculateSurroundings calculateSurroundings;
     void Start()
     {
         //player = GameObject.FindGameObjectWithTag("Player").transform;
-    //    rb = GetComponent<Rigidbody2D>();
+        //rb = GetComponent<Rigidbody2D>();
         allMinions.Add(this);
+    }
+    private void Awake()
+    {
+        calculateSurroundings = GetComponent<CalculateSurroundings>();
     }
 
     private Vector2 Separation()
@@ -47,14 +55,13 @@ public class Flocker : MonoBehaviour, IFlocker
             {
                 Vector2 moveDirection = (player.position - transform.position).normalized;
                 Vector2 separationForce = Separation();
-
-                // Combine movement towards player and separation
                 Vector2 finalVelocity = moveDirection + separationForce * separationWeight;
-                rb.velocity = finalVelocity.normalized * moveSpeed;
+
+                calculateSurroundings.CastRayAndMove(rayCount, finalVelocity,rayDistance, obstacleMask, avoidStrength, moveSpeed, rb);
             }
             else
             {
-                rb.velocity = Vector2.zero;
+                rb.linearVelocity = Vector2.zero;
             }
         }
     
